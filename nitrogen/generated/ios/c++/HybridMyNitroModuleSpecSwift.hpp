@@ -12,9 +12,13 @@
 // Forward declaration of `HybridMyNitroModuleSpec_cxx` to properly resolve imports.
 namespace MyNitroModule { class HybridMyNitroModuleSpec_cxx; }
 
+// Forward declaration of `DeviceInfo` to properly resolve imports.
+namespace margelo::nitro::mynitromodule { struct DeviceInfo; }
 
-
-
+#include <string>
+#include <vector>
+#include "DeviceInfo.hpp"
+#include <NitroModules/Promise.hpp>
 
 #include "MyNitroModule-Swift-Cxx-Umbrella.hpp"
 
@@ -59,6 +63,62 @@ namespace margelo::nitro::mynitromodule {
     // Methods
     inline double sum(double num1, double num2) override {
       auto __result = _swiftPart.sum(std::forward<decltype(num1)>(num1), std::forward<decltype(num2)>(num2));
+      if (__result.hasError()) [[unlikely]] {
+        std::rethrow_exception(__result.error());
+      }
+      auto __value = std::move(__result.value());
+      return __value;
+    }
+    inline double multiply(double num1, double num2) override {
+      auto __result = _swiftPart.multiply(std::forward<decltype(num1)>(num1), std::forward<decltype(num2)>(num2));
+      if (__result.hasError()) [[unlikely]] {
+        std::rethrow_exception(__result.error());
+      }
+      auto __value = std::move(__result.value());
+      return __value;
+    }
+    inline std::string greet(const std::string& name) override {
+      auto __result = _swiftPart.greet(name);
+      if (__result.hasError()) [[unlikely]] {
+        std::rethrow_exception(__result.error());
+      }
+      auto __value = std::move(__result.value());
+      return __value;
+    }
+    inline std::string reverseString(const std::string& input) override {
+      auto __result = _swiftPart.reverseString(input);
+      if (__result.hasError()) [[unlikely]] {
+        std::rethrow_exception(__result.error());
+      }
+      auto __value = std::move(__result.value());
+      return __value;
+    }
+    inline double getArraySum(const std::vector<double>& numbers) override {
+      auto __result = _swiftPart.getArraySum(numbers);
+      if (__result.hasError()) [[unlikely]] {
+        std::rethrow_exception(__result.error());
+      }
+      auto __value = std::move(__result.value());
+      return __value;
+    }
+    inline DeviceInfo getDeviceInfo() override {
+      auto __result = _swiftPart.getDeviceInfo();
+      if (__result.hasError()) [[unlikely]] {
+        std::rethrow_exception(__result.error());
+      }
+      auto __value = std::move(__result.value());
+      return __value;
+    }
+    inline std::shared_ptr<Promise<std::string>> delayedGreeting(const std::string& name, double delayMs) override {
+      auto __result = _swiftPart.delayedGreeting(name, std::forward<decltype(delayMs)>(delayMs));
+      if (__result.hasError()) [[unlikely]] {
+        std::rethrow_exception(__result.error());
+      }
+      auto __value = std::move(__result.value());
+      return __value;
+    }
+    inline bool isEven(double number) override {
+      auto __result = _swiftPart.isEven(std::forward<decltype(number)>(number));
       if (__result.hasError()) [[unlikely]] {
         std::rethrow_exception(__result.error());
       }

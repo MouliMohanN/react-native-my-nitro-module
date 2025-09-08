@@ -29,12 +29,12 @@ class HybridMyNitroModule: HybridMyNitroModuleSpec {
         return numbers.reduce(0, +)
     }
     
-    func getDeviceInfo() throws -> [String: Any] {
-        return [
-            "platform": "iOS",
-            "model": UIDevice.current.model,
-            "version": UIDevice.current.systemVersion
-        ]
+    func getDeviceInfo() throws -> DeviceInfo {
+        return DeviceInfo(
+            platform: "iOS",
+            model: UIDevice.current.model,
+            version: UIDevice.current.systemVersion
+        )
     }
     
     func delayedGreeting(name: String, delayMs: Double) -> Promise<String> {

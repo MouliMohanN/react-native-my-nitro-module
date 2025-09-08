@@ -15,6 +15,13 @@ namespace margelo::nitro::mynitromodule {
     // load custom methods/properties
     registerHybrids(this, [](Prototype& prototype) {
       prototype.registerHybridMethod("sum", &HybridMyNitroModuleSpec::sum);
+      prototype.registerHybridMethod("multiply", &HybridMyNitroModuleSpec::multiply);
+      prototype.registerHybridMethod("greet", &HybridMyNitroModuleSpec::greet);
+      prototype.registerHybridMethod("reverseString", &HybridMyNitroModuleSpec::reverseString);
+      prototype.registerHybridMethod("getArraySum", &HybridMyNitroModuleSpec::getArraySum);
+      prototype.registerHybridMethod("getDeviceInfo", &HybridMyNitroModuleSpec::getDeviceInfo);
+      prototype.registerHybridMethod("delayedGreeting", &HybridMyNitroModuleSpec::delayedGreeting);
+      prototype.registerHybridMethod("isEven", &HybridMyNitroModuleSpec::isEven);
     });
   }
 

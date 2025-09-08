@@ -13,6 +13,22 @@
 
 namespace margelo::nitro::mynitromodule::bridge::swift {
 
+  // pragma MARK: std::function<void(const std::string& /* result */)>
+  Func_void_std__string create_Func_void_std__string(void* _Nonnull swiftClosureWrapper) noexcept {
+    auto swiftClosure = MyNitroModule::Func_void_std__string::fromUnsafe(swiftClosureWrapper);
+    return [swiftClosure = std::move(swiftClosure)](const std::string& result) mutable -> void {
+      swiftClosure.call(result);
+    };
+  }
+  
+  // pragma MARK: std::function<void(const std::exception_ptr& /* error */)>
+  Func_void_std__exception_ptr create_Func_void_std__exception_ptr(void* _Nonnull swiftClosureWrapper) noexcept {
+    auto swiftClosure = MyNitroModule::Func_void_std__exception_ptr::fromUnsafe(swiftClosureWrapper);
+    return [swiftClosure = std::move(swiftClosure)](const std::exception_ptr& error) mutable -> void {
+      swiftClosure.call(error);
+    };
+  }
+  
   // pragma MARK: std::shared_ptr<HybridMyNitroModuleSpec>
   std::shared_ptr<HybridMyNitroModuleSpec> create_std__shared_ptr_HybridMyNitroModuleSpec_(void* _Nonnull swiftUnsafePointer) noexcept {
     MyNitroModule::HybridMyNitroModuleSpec_cxx swiftPart = MyNitroModule::HybridMyNitroModuleSpec_cxx::fromUnsafe(swiftUnsafePointer);

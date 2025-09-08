@@ -13,9 +13,13 @@
 #error NitroModules cannot be found! Are you sure you installed NitroModules properly?
 #endif
 
+// Forward declaration of `DeviceInfo` to properly resolve imports.
+namespace margelo::nitro::mynitromodule { struct DeviceInfo; }
 
-
-
+#include <string>
+#include <vector>
+#include "DeviceInfo.hpp"
+#include <NitroModules/Promise.hpp>
 
 namespace margelo::nitro::mynitromodule {
 
@@ -49,6 +53,13 @@ namespace margelo::nitro::mynitromodule {
     public:
       // Methods
       virtual double sum(double num1, double num2) = 0;
+      virtual double multiply(double num1, double num2) = 0;
+      virtual std::string greet(const std::string& name) = 0;
+      virtual std::string reverseString(const std::string& input) = 0;
+      virtual double getArraySum(const std::vector<double>& numbers) = 0;
+      virtual DeviceInfo getDeviceInfo() = 0;
+      virtual std::shared_ptr<Promise<std::string>> delayedGreeting(const std::string& name, double delayMs) = 0;
+      virtual bool isEven(double number) = 0;
 
     protected:
       // Hybrid Setup

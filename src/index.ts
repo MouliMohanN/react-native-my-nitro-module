@@ -3,3 +3,6 @@ import type { MyNitroModule as MyNitroModuleSpec } from './specs/my-nitro-module
 
 export const MyNitroModule =
   NitroModules.createHybridObject<MyNitroModuleSpec>('MyNitroModule')
+
+// Export types for consumers
+export type { DeviceInfo } from './specs/my-nitro-module.nitro'

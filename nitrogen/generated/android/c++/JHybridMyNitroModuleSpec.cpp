@@ -7,9 +7,15 @@
 
 #include "JHybridMyNitroModuleSpec.hpp"
 
+// Forward declaration of `DeviceInfo` to properly resolve imports.
+namespace margelo::nitro::mynitromodule { struct DeviceInfo; }
 
-
-
+#include <string>
+#include "DeviceInfo.hpp"
+#include "JDeviceInfo.hpp"
+#include <NitroModules/Promise.hpp>
+#include <NitroModules/JPromise.hpp>
+#include <vector>
 
 namespace margelo::nitro::mynitromodule {
 
@@ -41,6 +47,57 @@ namespace margelo::nitro::mynitromodule {
     static const auto method = javaClassStatic()->getMethod<double(double /* num1 */, double /* num2 */)>("sum");
     auto __result = method(_javaPart, num1, num2);
     return __result;
+  }
+  double JHybridMyNitroModuleSpec::multiply(double num1, double num2) {
+    static const auto method = javaClassStatic()->getMethod<double(double /* num1 */, double /* num2 */)>("multiply");
+    auto __result = method(_javaPart, num1, num2);
+    return __result;
+  }
+  std::string JHybridMyNitroModuleSpec::greet(const std::string& name) {
+    static const auto method = javaClassStatic()->getMethod<jni::local_ref<jni::JString>(jni::alias_ref<jni::JString> /* name */)>("greet");
+    auto __result = method(_javaPart, jni::make_jstring(name));
+    return __result->toStdString();
+  }
+  std::string JHybridMyNitroModuleSpec::reverseString(const std::string& input) {
+    static const auto method = javaClassStatic()->getMethod<jni::local_ref<jni::JString>(jni::alias_ref<jni::JString> /* input */)>("reverseString");
+    auto __result = method(_javaPart, jni::make_jstring(input));
+    return __result->toStdString();
+  }
+  double JHybridMyNitroModuleSpec::getArraySum(const std::vector<double>& numbers) {
+    static const auto method = javaClassStatic()->getMethod<double(jni::alias_ref<jni::JArrayDouble> /* numbers */)>("getArraySum");
+    auto __result = method(_javaPart, [&]() {
+      size_t __size = numbers.size();
+      jni::local_ref<jni::JArrayDouble> __array = jni::JArrayDouble::newArray(__size);
+      __array->setRegion(0, __size, numbers.data());
+      return __array;
+    }());
+    return __result;
+  }
+  DeviceInfo JHybridMyNitroModuleSpec::getDeviceInfo() {
+    static const auto method = javaClassStatic()->getMethod<jni::local_ref<JDeviceInfo>()>("getDeviceInfo");
+    auto __result = method(_javaPart);
+    return __result->toCpp();
+  }
+  std::shared_ptr<Promise<std::string>> JHybridMyNitroModuleSpec::delayedGreeting(const std::string& name, double delayMs) {
+    static const auto method = javaClassStatic()->getMethod<jni::local_ref<JPromise::javaobject>(jni::alias_ref<jni::JString> /* name */, double /* delayMs */)>("delayedGreeting");
+    auto __result = method(_javaPart, jni::make_jstring(name), delayMs);
+    return [&]() {
+      auto __promise = Promise<std::string>::create();
+      __result->cthis()->addOnResolvedListener([=](const jni::alias_ref<jni::JObject>& __boxedResult) {
+        auto __result = jni::static_ref_cast<jni::JString>(__boxedResult);
+        __promise->resolve(__result->toStdString());
+      });
+      __result->cthis()->addOnRejectedListener([=](const jni::alias_ref<jni::JThrowable>& __throwable) {
+        jni::JniException __jniError(__throwable);
+        __promise->reject(std::make_exception_ptr(__jniError));
+      });
+      return __promise;
+    }();
+  }
+  bool JHybridMyNitroModuleSpec::isEven(double number) {
+    static const auto method = javaClassStatic()->getMethod<jboolean(double /* number */)>("isEven");
+    auto __result = method(_javaPart, number);
+    return static_cast<bool>(__result);
   }
 
 } // namespace margelo::nitro::mynitromodule

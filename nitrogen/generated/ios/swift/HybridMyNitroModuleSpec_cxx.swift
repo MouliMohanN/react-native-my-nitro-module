@@ -120,4 +120,95 @@ open class HybridMyNitroModuleSpec_cxx {
       return bridge.create_Result_double_(__exceptionPtr)
     }
   }
+  
+  @inline(__always)
+  public final func multiply(num1: Double, num2: Double) -> bridge.Result_double_ {
+    do {
+      let __result = try self.__implementation.multiply(num1: num1, num2: num2)
+      let __resultCpp = __result
+      return bridge.create_Result_double_(__resultCpp)
+    } catch (let __error) {
+      let __exceptionPtr = __error.toCpp()
+      return bridge.create_Result_double_(__exceptionPtr)
+    }
+  }
+  
+  @inline(__always)
+  public final func greet(name: std.string) -> bridge.Result_std__string_ {
+    do {
+      let __result = try self.__implementation.greet(name: String(name))
+      let __resultCpp = std.string(__result)
+      return bridge.create_Result_std__string_(__resultCpp)
+    } catch (let __error) {
+      let __exceptionPtr = __error.toCpp()
+      return bridge.create_Result_std__string_(__exceptionPtr)
+    }
+  }
+  
+  @inline(__always)
+  public final func reverseString(input: std.string) -> bridge.Result_std__string_ {
+    do {
+      let __result = try self.__implementation.reverseString(input: String(input))
+      let __resultCpp = std.string(__result)
+      return bridge.create_Result_std__string_(__resultCpp)
+    } catch (let __error) {
+      let __exceptionPtr = __error.toCpp()
+      return bridge.create_Result_std__string_(__exceptionPtr)
+    }
+  }
+  
+  @inline(__always)
+  public final func getArraySum(numbers: bridge.std__vector_double_) -> bridge.Result_double_ {
+    do {
+      let __result = try self.__implementation.getArraySum(numbers: numbers.map({ __item in __item }))
+      let __resultCpp = __result
+      return bridge.create_Result_double_(__resultCpp)
+    } catch (let __error) {
+      let __exceptionPtr = __error.toCpp()
+      return bridge.create_Result_double_(__exceptionPtr)
+    }
+  }
+  
+  @inline(__always)
+  public final func getDeviceInfo() -> bridge.Result_DeviceInfo_ {
+    do {
+      let __result = try self.__implementation.getDeviceInfo()
+      let __resultCpp = __result
+      return bridge.create_Result_DeviceInfo_(__resultCpp)
+    } catch (let __error) {
+      let __exceptionPtr = __error.toCpp()
+      return bridge.create_Result_DeviceInfo_(__exceptionPtr)
+    }
+  }
+  
+  @inline(__always)
+  public final func delayedGreeting(name: std.string, delayMs: Double) -> bridge.Result_std__shared_ptr_Promise_std__string___ {
+    do {
+      let __result = try self.__implementation.delayedGreeting(name: String(name), delayMs: delayMs)
+      let __resultCpp = { () -> bridge.std__shared_ptr_Promise_std__string__ in
+        let __promise = bridge.create_std__shared_ptr_Promise_std__string__()
+        let __promiseHolder = bridge.wrap_std__shared_ptr_Promise_std__string__(__promise)
+        __result
+          .then({ __result in __promiseHolder.resolve(std.string(__result)) })
+          .catch({ __error in __promiseHolder.reject(__error.toCpp()) })
+        return __promise
+      }()
+      return bridge.create_Result_std__shared_ptr_Promise_std__string___(__resultCpp)
+    } catch (let __error) {
+      let __exceptionPtr = __error.toCpp()
+      return bridge.create_Result_std__shared_ptr_Promise_std__string___(__exceptionPtr)
+    }
+  }
+  
+  @inline(__always)
+  public final func isEven(number: Double) -> bridge.Result_bool_ {
+    do {
+      let __result = try self.__implementation.isEven(number: number)
+      let __resultCpp = __result
+      return bridge.create_Result_bool_(__resultCpp)
+    } catch (let __error) {
+      let __exceptionPtr = __error.toCpp()
+      return bridge.create_Result_bool_(__exceptionPtr)
+    }
+  }
 }

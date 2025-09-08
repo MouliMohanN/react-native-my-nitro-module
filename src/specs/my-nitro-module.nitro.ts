@@ -1,5 +1,11 @@
 import { type HybridObject } from 'react-native-nitro-modules'
 
+export interface DeviceInfo {
+  platform: string
+  model: string
+  version: string
+}
+
 export interface MyNitroModule extends HybridObject<{ android: 'kotlin', ios: 'swift' }> {
   // Basic arithmetic operations
   sum(num1: number, num2: number): number
@@ -13,7 +19,7 @@ export interface MyNitroModule extends HybridObject<{ android: 'kotlin', ios: 's
   getArraySum(numbers: number[]): number
   
   // Object operations
-  getDeviceInfo(): { platform: string; model: string; version: string }
+  getDeviceInfo(): DeviceInfo
   
   // Async operations
   delayedGreeting(name: string, delayMs: number): Promise<string>

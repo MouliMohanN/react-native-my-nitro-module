@@ -43,6 +43,34 @@ abstract class HybridMyNitroModuleSpec: HybridObject() {
   @DoNotStrip
   @Keep
   abstract fun sum(num1: Double, num2: Double): Double
+  
+  @DoNotStrip
+  @Keep
+  abstract fun multiply(num1: Double, num2: Double): Double
+  
+  @DoNotStrip
+  @Keep
+  abstract fun greet(name: String): String
+  
+  @DoNotStrip
+  @Keep
+  abstract fun reverseString(input: String): String
+  
+  @DoNotStrip
+  @Keep
+  abstract fun getArraySum(numbers: DoubleArray): Double
+  
+  @DoNotStrip
+  @Keep
+  abstract fun getDeviceInfo(): DeviceInfo
+  
+  @DoNotStrip
+  @Keep
+  abstract fun delayedGreeting(name: String, delayMs: Double): Promise<String>
+  
+  @DoNotStrip
+  @Keep
+  abstract fun isEven(number: Double): Boolean
 
   private external fun initHybrid(): HybridData
 

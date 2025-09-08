@@ -54,6 +54,13 @@ namespace margelo::nitro::mynitromodule {
   public:
     // Methods
     double sum(double num1, double num2) override;
+    double multiply(double num1, double num2) override;
+    std::string greet(const std::string& name) override;
+    std::string reverseString(const std::string& input) override;
+    double getArraySum(const std::vector<double>& numbers) override;
+    DeviceInfo getDeviceInfo() override;
+    std::shared_ptr<Promise<std::string>> delayedGreeting(const std::string& name, double delayMs) override;
+    bool isEven(double number) override;
 
   private:
     friend HybridBase;

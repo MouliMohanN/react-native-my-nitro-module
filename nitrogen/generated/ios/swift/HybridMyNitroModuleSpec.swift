@@ -15,6 +15,13 @@ public protocol HybridMyNitroModuleSpec_protocol: HybridObject {
 
   // Methods
   func sum(num1: Double, num2: Double) throws -> Double
+  func multiply(num1: Double, num2: Double) throws -> Double
+  func greet(name: String) throws -> String
+  func reverseString(input: String) throws -> String
+  func getArraySum(numbers: [Double]) throws -> Double
+  func getDeviceInfo() throws -> DeviceInfo
+  func delayedGreeting(name: String, delayMs: Double) throws -> Promise<String>
+  func isEven(number: Double) throws -> Bool
 }
 
 /// See ``HybridMyNitroModuleSpec``
